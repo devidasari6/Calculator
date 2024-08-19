@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Example</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>JavaScript Tasks</h1>
+        
+        <div class="task">
+            <h2>Task 1: Simple Calculator</h2>
+            <input type="number" id="num1" placeholder="Enter first number">
+            <input type="number" id="num2" placeholder="Enter second number">
+            <select id="operator">
+                <option value="+">+</option>
+                <option value="-">-</option>
+                <option value="*">*</option>
+                <option value="/">/</option>
+            </select>
+            <button onclick="calculate()">Calculate</button>
+            <p id="calc-result"></p>
+        </div>
+
+        <div class="task">
+            <h2>Task 2: Array Operations</h2>
+            <input type="text" id="arrayInput" placeholder="Enter numbers separated by commas">
+            <button onclick="calculateSum()">Calculate Sum of Even Numbers</button>
+            <p id="sum-result"></p>
+        </div>
+
+        <div class="task">
+            <h2>Task 3: Object Manipulation</h2>
+            <select id="personSelect">
+                <option value="0">John Doe</option>
+                <option value="1">Jane Smith</option>
+                <option value="2">Alice Johnson</option>
+            </select>
+            <button onclick="showPersonDetails(document.getElementById('personSelect').value)">Show Person Details</button>
+            <p id="person-details"></p>
+            <button onclick="incrementAge(document.getElementById('personSelect').value)">Increment Age</button>
+            <p id="person-age"></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+// Function to perform basic arithmetic operations
+function simpleCalculator(num1, num2, operator) {
+    switch (operator) {
+        case '+':
+            return num1 + num2;
+        case '-':
+            return num1 - num2;
+        case '*':
+            return num1 * num2;
+        case '/':
+            // Check for division by zero
+            if (num2 !== 0) {
+                return num1 / num2;
+            } else {
+                return 'Division by zero is not allowed';
+            }
+        default:
+            return 'Invalid operator';
+    }
+}
+
+function calculate() {
+    const num1 = parseFloat(document.getElementById('num1').value);
+    const num2 = parseFloat(document.getElementById('num2').value);
+    const operator = document.getElementById('operator').value;
+    const result = simpleCalculator(num1, num2, operator);
+    document.getElementById('calc-result').innerText = `Result: ${result}`;
+}
+
+// Function to calculate sum of even numbers in an array
+function sumOfEvenNumbers(arr) {
+    let sum = 0;
+    for (let num of arr) {
+        if (num % 2 === 0) {
+            sum += num;
+        }
+    }
+    return sum;
+}
+
+function calculateSum() {
+    const arrayInput = document.getElementById('arrayInput').value;
+    const arr = arrayInput.split(',').map(Number);
+    const result = sumOfEvenNumbers(arr);
+    document.getElementById('sum-result').innerText = `Sum of even numbers: ${result}`;
+}
+
+// Object declaration and method implementation
+// Object declaration and method implementation
+let persons = [
+    {
+        firstName: 'John',
+        lastName: 'Doe',
+        age: 18,
+        getFullName: function() {
+            return `${this.firstName} ${this.lastName}`;
+        },
+        incrementAge: function() {
+            this.age++;
+        }
+    },
+    {
+        firstName: 'Jane',
+        lastName: 'Smith',
+        age: 25,
+        getFullName: function() {
+            return `${this.firstName} ${this.lastName}`;
+        },
+        incrementAge: function() {
+            this.age++;
+        }
+    },
+    {
+        firstName: 'Alice',
+        lastName: 'Johnson',
+        age: 35,
+        getFullName: function() {
+            return `${this.firstName} ${this.lastName}`;
+        },
+        incrementAge: function() {
+            this.age++;
+        }
+    },
+];
+
+function showPersonDetails(index) {
+    const person = persons[index];
+    document.getElementById('person-details').innerText = `Full Name: ${person.getFullName()}\nAge: ${person.age}`;
+}
+
+function incrementAge(index) {
+    const person = persons[index];
+    person.incrementAge();
+    document.getElementById('person-age').innerText = `Age: ${person.age}`;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 600px;
+  margin: 50px auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+.task {
+  margin-bottom: 30px;
+}
+
+input[type="number"], input[type="text"], select {
+  width: calc(100% - 24px);
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+p {
+  font-size: 16px;
+  color: #333;
+}
